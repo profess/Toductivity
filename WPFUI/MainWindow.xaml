@@ -1,0 +1,127 @@
+﻿<Window x:Name="Shiny_Timer" x:Class="WPFUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFUI"
+        mc:Ignorable="d" FontSize="18" FontFamily="Segoe UI Light"
+        Title="Shiny Timer" Height="350" Width="580"
+        Icon="Icon1.ico" Background="Black">
+    <Grid>
+        <!-- Row/Col definitions -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="20" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+
+        <!-- Heading -->
+        <TextBlock Grid.Column="1" Grid.Row="1" FontSize="36"
+                   Text="Settings" Grid.ColumnSpan="3"
+                   Margin="0,0,0,10"/>
+        
+        <!-- Work/Break -->
+        <Grid Grid.Column="3" Margin="124,0,114.333,10" Grid.Row="1">
+            <TextBlock x:Name="workBreakTextBlock"
+                FontSize="36"
+                Text="Work" Grid.ColumnSpan="1" HorizontalAlignment="Center"
+                Margin="0,0,9.334,10"/>
+        </Grid>
+
+        <!-- Round Time -->
+        <TextBlock Text="Round Time:" Grid.Column="1" Grid.Row="2" 
+                   FontFamily="Segoe UI" FontWeight="SemiBold"/>
+        <TextBox Text="25" Grid.Column="2" Grid.Row="2"
+                 x:Name="roundTime" Width="50" MaxWidth="50" 
+                 PreviewTextInput="TextBox_PreviewTextInput"
+                 PreviewKeyDown="TextBox_PreviewKeyDown" AllowDrop="False" >
+            <TextBox.ContextMenu>
+                <ContextMenu Visibility="Hidden"/>
+            </TextBox.ContextMenu>
+        </TextBox>
+
+        <!-- Short Break Time -->
+        <TextBlock Text="Short Break Time:" Grid.Column="1" Grid.Row="3" 
+                   FontFamily="Segoe UI" FontWeight="SemiBold"/>
+        <TextBox Text="5" Grid.Column="2" Grid.Row="3"
+                 x:Name="breakTime" Width="50" MaxWidth="50" 
+                 PreviewTextInput="TextBox_PreviewTextInput"
+                 PreviewKeyDown="TextBox_PreviewKeyDown" AllowDrop="False" >
+            <TextBox.ContextMenu>
+                <ContextMenu Visibility="Hidden"/>
+            </TextBox.ContextMenu>
+        </TextBox>
+
+        <!-- Long Break Time -->
+        <TextBlock Text="Long Break Time:" Grid.Column="1" Grid.Row="4" 
+                   FontFamily="Segoe UI" FontWeight="SemiBold"/>
+        <TextBox Text="20" Grid.Column="2" Grid.Row="4"
+                 x:Name="longBreakTime" Width="50" MaxWidth="50" 
+                 PreviewTextInput="TextBox_PreviewTextInput"
+                 PreviewKeyDown="TextBox_PreviewKeyDown" AllowDrop="False" >
+            <TextBox.ContextMenu>
+                <ContextMenu Visibility="Hidden"/>
+            </TextBox.ContextMenu>
+        </TextBox>
+
+        <!-- Total Rounds -->
+        <TextBlock Text="Total Rounds:" Grid.Column="1" Grid.Row="5" 
+                   FontFamily="Segoe UI" FontWeight="SemiBold"/>
+        <TextBox Text="12" Grid.Column="2" Grid.Row="5"
+                 x:Name="totalRounds" Width="50" MaxWidth="50" 
+                 PreviewTextInput="TextBox_PreviewTextInput"
+                 PreviewKeyDown="TextBox_PreviewKeyDown" AllowDrop="False" >
+            <TextBox.ContextMenu>
+                <ContextMenu Visibility="Hidden"/>
+            </TextBox.ContextMenu>
+        </TextBox>
+
+        <!-- Long Break Round -->
+        <TextBlock Text="Long Break Round:" Grid.Column="1" Grid.Row="6" 
+                   FontFamily="Segoe UI" FontWeight="SemiBold"/>
+        <TextBox Text="4" Grid.Column="2" Grid.Row="6"
+                 x:Name="longBreakRound" Width="50" MaxWidth="50" 
+                 PreviewTextInput="TextBox_PreviewTextInput"
+                 PreviewKeyDown="TextBox_PreviewKeyDown" AllowDrop="False" >
+            <TextBox.ContextMenu>
+                <ContextMenu Visibility="Hidden"/>
+            </TextBox.ContextMenu>
+        </TextBox>
+
+        <!-- Timer Block -->
+        <TextBlock x:Name="timerTextBlock"
+                   Grid.Column="3"
+                   Grid.Row="2"
+                   Text="25:00"
+                   FontSize="128"
+                   Grid.RowSpan="7"
+                   Margin="25,0,0,0"
+                   x:FieldModifier="public"
+                   />
+
+        <!-- Buttons -->
+        <Button x:Name="submitButton" Content="Start"
+                Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="1"
+                Margin="10" Click="SubmitButton_Click" />
+        <Button x:Name="resetButton" Content="Reset"
+                Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="1"
+                Margin="10" Click="resetButton_Click" />
+    </Grid>
+</Window>
