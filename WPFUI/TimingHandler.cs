@@ -10,13 +10,14 @@ namespace WPFUI
 {
     class TimingHandler
     {
+        // TODO: stop using Form directly
         MainWindow Form = App.Current.Windows[0] as MainWindow;
         private bool finished, workRound;
         private int currentTimer, currentRound, totalRounds, roundDuration,
             breakDuration, longBreakDuration, longBreakRound;
-        private string timeFmt;
-        private TimeSpan ts;
-        private DispatcherTimer dt;
+        private readonly string timeFmt;
+        private TimeSpan MyTimeSpan;
+        private DispatcherTimer MyDispatcherTimer;
 
         public TimingHandler(
             int totalRounds,
@@ -37,8 +38,8 @@ namespace WPFUI
             currentTimer = this.roundDuration;
             // Update label with work time
             timeFmt = @"mm\:ss";
-            ts = new TimeSpan(0, roundDuration, 0);
-            Form.timerTextBlock.Text = ts.ToString(timeFmt);
+            MyTimeSpan = new TimeSpan(0, roundDuration, 0);
+            Form.timerTextBlock.Text = MyTimeSpan.ToString(timeFmt);
         }
 
         private void UpdateLabel()
@@ -50,7 +51,7 @@ namespace WPFUI
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
-            // TODO: Use the finished boolean here; alternatively refactor to use method IsFinished. 
+            // TODO: Use the 'finished' boolean here; alternatively refactor to use method IsFinished. 
             if (currentRound < totalRounds)
             {
                 if (currentTimer > 0)
@@ -77,7 +78,7 @@ namespace WPFUI
             else
             {
                 // Done
-                dt.Stop();
+                MyDispatcherTimer.Stop();
                 finished = true;
                 // TODO: Move this to MainWindow.cs
                 // Revert Start button after everything is done.
@@ -93,25 +94,25 @@ namespace WPFUI
 
         public void Start()
         {
-            if (dt == null)
+            if (MyDispatcherTimer == null)
             {
-                dt = new System.Windows.Threading.DispatcherTimer();
-                dt.Tick += new EventHandler(DispatcherTimer_Tick);
-                dt.Interval = TimeSpan.FromSeconds(1.0d);
+                MyDispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+                MyDispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
+                MyDispatcherTimer.Interval = TimeSpan.FromSeconds(1.0d);
             }
-            dt.Start();
+            MyDispatcherTimer.Start();
             finished = false;
         }
 
         public void Pause()
         {
-            dt.Stop();
+            MyDispatcherTimer.Stop();
         }
 
         public void Stop()
         {
-            dt.Stop();
-            dt = null;
+            MyDispatcherTimer.Stop();
+            MyDispatcherTimer = null;
             finished = true;
         }
     }
