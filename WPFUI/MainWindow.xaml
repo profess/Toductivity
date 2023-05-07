@@ -122,6 +122,6 @@
                 Margin="10" Click="SubmitButton_Click" />
         <Button x:Name="resetButton" Content="Reset"
                 Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="1"
-                Margin="10" Click="resetButton_Click" />
+                Margin="10" Click="ResetButton_Click" />
     </Grid>
 </Window>

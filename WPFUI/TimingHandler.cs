@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Threading;
 
 namespace WPFUI
@@ -13,7 +14,6 @@ namespace WPFUI
         private bool finished, workRound;
         private int currentTimer, currentRound, totalRounds, roundDuration,
             breakDuration, longBreakDuration, longBreakRound;
-        private object button, textBlock;
         private string timeFmt;
         private TimeSpan ts;
         private DispatcherTimer dt;
@@ -23,9 +23,7 @@ namespace WPFUI
             int roundDuration, 
             int breakDuration, 
             int longBreakDuration, 
-            int longBreakRound,
-            object button,
-            object textBlock
+            int longBreakRound
             )
         {
             this.totalRounds        = totalRounds;
@@ -33,8 +31,6 @@ namespace WPFUI
             this.breakDuration      = breakDuration * 60;
             this.longBreakDuration  = longBreakDuration * 60;
             this.longBreakRound     = longBreakRound;
-            this.button             = button;
-            this.textBlock          = textBlock;
             finished = false;
             workRound = true;
             currentRound = 0;
@@ -45,13 +41,16 @@ namespace WPFUI
             Form.timerTextBlock.Text = ts.ToString(timeFmt);
         }
 
-        private void updateLabel()
+        private void UpdateLabel()
         {
+            // TODO: Decouple from the Form.
             Form.timerTextBlock.Text = (new TimeSpan(0, currentTimer / 60, currentTimer % 60)).ToString(timeFmt);
+            CommandManager.InvalidateRequerySuggested();
         }
 
-        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
+            // TODO: Use the finished boolean here; alternatively refactor to use method IsFinished. 
             if (currentRound < totalRounds)
             {
                 if (currentTimer > 0)
@@ -62,41 +61,32 @@ namespace WPFUI
                 {
                     if (workRound)
                     {
-                        workRound = !workRound;
                         currentTimer = (1 + currentRound) % longBreakRound != 0 ? breakDuration : longBreakDuration;
                         Form.workBreakTextBlock.Text = "Break";
-                        // Play "break time" sound
-                        System.Media.SystemSounds.Asterisk.Play();
-                        // Restore window
-                        //Form.WindowState = System.Windows.WindowState.Normal;
                     } 
                     else
                     {
-                        workRound = !workRound;
                         currentRound++;
                         currentTimer = roundDuration;
                         Form.workBreakTextBlock.Text = "Work";
-                        // Play "back to work" sound
-                        System.Media.SystemSounds.Asterisk.Play();
-                        // Maximize winow to block
-                        //Form.Activate();
-                        //Form.WindowState = System.Windows.WindowState.Maximized;
                     }
+                    workRound = !workRound;
+                    System.Media.SystemSounds.Asterisk.Play();
                 }
-
             } 
             else
             {
                 // Done
                 dt.Stop();
                 finished = true;
-                // Revert Start button
+                // TODO: Move this to MainWindow.cs
+                // Revert Start button after everything is done.
                 Form.submitButton.Content = "Start";
             }
-            updateLabel();
+            UpdateLabel();
         }
 
-        public bool isFinished()
+        public bool IsFinished()
         {
             return finished;
         }
@@ -106,13 +96,11 @@ namespace WPFUI
             if (dt == null)
             {
                 dt = new System.Windows.Threading.DispatcherTimer();
-                dt.Tick += new EventHandler(dispatcherTimer_Tick);
-                dt.Interval = TimeSpan.FromSeconds(1);
+                dt.Tick += new EventHandler(DispatcherTimer_Tick);
+                dt.Interval = TimeSpan.FromSeconds(1.0d);
             }
             dt.Start();
             finished = false;
-            //Form.Activate();
-            //Form.WindowState = System.Windows.WindowState.Maximized;
         }
 
         public void Pause()
