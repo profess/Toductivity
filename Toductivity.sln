@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shiny Timer", "WPFUI\Shiny Timer.csproj", "{95FB413E-345E-4DB2-B26D-3DE2F88E9FFA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Toductivity", "WPFUI\Toductivity.csproj", "{95FB413E-345E-4DB2-B26D-3DE2F88E9FFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

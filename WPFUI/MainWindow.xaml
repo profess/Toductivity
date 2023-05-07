@@ -60,7 +60,7 @@
 
         <!-- Short Break Time -->
         <TextBlock Text="Short Break Time:" Grid.Column="2" Grid.Row="3" 
-                   FontFamily="Segoe UI" FontWeight="SemiBold" Margin="0,0,0,26" Grid.RowSpan="2"/>
+                   FontFamily="Segoe UI" FontWeight="SemiBold" Margin="0,2,0,24" Grid.RowSpan="2"/>
         <TextBox Text="5" Grid.Column="2" Grid.Row="3"
                  x:Name="breakTime" Width="50" MaxWidth="50" 
                  PreviewTextInput="TextBox_PreviewTextInput"
