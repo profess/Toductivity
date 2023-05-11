@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Toductivity
 {
@@ -33,7 +23,7 @@ namespace Toductivity
         {
             e.Handled = IsTextAllowed(e.Text);
         }
-                
+
         private static bool IsTextAllowed(string text)
         {
             return !MatchingRegex.IsMatch(text);
@@ -41,10 +31,10 @@ namespace Toductivity
 
         private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            e.Handled 
-                =  e.Key.ToString() == "Space" 
-                || e.Key.ToString() == "LeftCtrl" 
-                || e.Key.ToString() == "RightCtrl" 
+            e.Handled
+                = e.Key.ToString() == "Space"
+                || e.Key.ToString() == "LeftCtrl"
+                || e.Key.ToString() == "RightCtrl"
                 || e.Key.ToString() == "V"
                 || e.Key.ToString() == "Insert";
         }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Threading;
 
@@ -21,17 +17,17 @@ namespace Toductivity
 
         public TimingHandler(
             int totalRounds,
-            int roundDuration, 
-            int breakDuration, 
-            int longBreakDuration, 
+            int roundDuration,
+            int breakDuration,
+            int longBreakDuration,
             int longBreakRound
             )
         {
-            this.totalRounds        = totalRounds;
-            this.roundDuration      = roundDuration * 60;
-            this.breakDuration      = breakDuration * 60;
-            this.longBreakDuration  = longBreakDuration * 60;
-            this.longBreakRound     = longBreakRound;
+            this.totalRounds = totalRounds;
+            this.roundDuration = roundDuration * 60;
+            this.breakDuration = breakDuration * 60;
+            this.longBreakDuration = longBreakDuration * 60;
+            this.longBreakRound = longBreakRound;
             finished = false;
             workRound = true;
             currentRound = 0;
@@ -64,7 +60,7 @@ namespace Toductivity
                     {
                         currentTimer = (1 + currentRound) % longBreakRound != 0 ? breakDuration : longBreakDuration;
                         Form.workBreakTextBlock.Text = "Break";
-                    } 
+                    }
                     else
                     {
                         currentRound++;
@@ -74,7 +70,7 @@ namespace Toductivity
                     workRound = !workRound;
                     System.Media.SystemSounds.Asterisk.Play();
                 }
-            } 
+            }
             else
             {
                 // Done
