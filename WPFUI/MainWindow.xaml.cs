@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WPFUI
+namespace Toductivity
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
