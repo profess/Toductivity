@@ -4,16 +4,24 @@ using System.Windows.Threading;
 
 namespace Toductivity
 {
-    class TimingHandler
+    class TimingHandler : IDisposable
     {
         // TODO: stop using Form directly
-        MainWindow Form = App.Current.Windows[0] as MainWindow;
+        MainWindow Form = System.Windows.Application.Current.Windows[0] as MainWindow;
         private bool finished, workRound;
         private int currentTimer, currentRound, totalRounds, roundDuration,
             breakDuration, longBreakDuration, longBreakRound;
         private readonly string timeFmt;
         private TimeSpan MyTimeSpan;
         private DispatcherTimer MyDispatcherTimer;
+
+        public int CurrentTimer { get => currentTimer; set => currentTimer = value; }
+        public int CurrentRound { get => currentRound; set => currentRound = value; }
+        public int TotalRounds { get => totalRounds; set => totalRounds = value; }
+        public int RoundDuration { get => roundDuration; set => roundDuration = value; }
+        public int BreakDuration { get => breakDuration; set => breakDuration = value; }
+        public int LongBreakDuration { get => longBreakDuration; set => longBreakDuration = value; }
+        public int LongBreakRound { get => longBreakRound; set => longBreakRound = value; }
 
         public TimingHandler(
             int totalRounds,
@@ -23,11 +31,20 @@ namespace Toductivity
             int longBreakRound
             )
         {
+<<<<<<< HEAD
             this.totalRounds = totalRounds;
             this.roundDuration = roundDuration * 60;
             this.breakDuration = breakDuration * 60;
             this.longBreakDuration = longBreakDuration * 60;
             this.longBreakRound = longBreakRound;
+=======
+            this.totalRounds        = totalRounds;
+            this.roundDuration      = roundDuration * 60;
+            this.breakDuration      = breakDuration * 60;
+            this.longBreakDuration  = longBreakDuration * 60;
+            this.longBreakRound     = longBreakRound;
+
+>>>>>>> Added disposer
             finished = false;
             workRound = true;
             currentRound = 0;
@@ -110,6 +127,12 @@ namespace Toductivity
             MyDispatcherTimer.Stop();
             MyDispatcherTimer = null;
             finished = true;
+        }
+
+        public void Dispose()
+        {
+            MyDispatcherTimer.Stop();
+            MyDispatcherTimer = null;
         }
     }
 }
